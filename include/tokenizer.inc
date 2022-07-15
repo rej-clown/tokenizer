@@ -9,6 +9,16 @@
     #define API_OOD         "The plugin module uses an outdated API. You must update it. Comp. API key: "...TOKENIZER_API_KEY    
 #endif
 
+enum STORAGE_OPERATION
+{
+    STORAGE_CREATE = 0,
+    STORAGE_READ,
+    STORAGE_UPDATE,
+    STORAGE_DELETE,
+
+    STORAGE_OPERATIONS_END
+};
+
 public SharedPlugin __pl_tokenizer= 
 {
     name = "tokenizer",
