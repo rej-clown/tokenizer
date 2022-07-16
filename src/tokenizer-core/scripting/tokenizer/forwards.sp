@@ -1,8 +1,9 @@
-Action tokenRequest(const GlobalForward gf, const char[] operation, JsonBuilder context) 
+Action tokenRequest(const GlobalForward globalForward, const char[] operation, JsonBuilder context) 
 {    
     Action what = Plugin_Continue;
 
-    Call_StartForward(gf);
+    Call_StartForward(globalForward);
+    // Call_PushString(path);
     Call_PushString(operation)
     Call_PushCell(context);
     Call_Finish(what);

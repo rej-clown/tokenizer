@@ -13,17 +13,12 @@ public Plugin myinfo =
 
 Json g_jsonConfig;
 
-GlobalForward g_gfTokenCreateRequest;
-GlobalForward g_gfTokenCreated;
-GlobalForward g_gfTokenFromStorageRequest;
-GlobalForward g_gfTokenActivateRequest;
-GlobalForward g_gfTokenActivated;
-GlobalForward g_gfTokenSecurityCheck;
-
 GlobalForward g_gfOnTokenRequest;
 GlobalForward g_gfTokenStorageRequest;
 GlobalForward g_gfTokenSecurityRequest;
+GlobalForward g_gfTokenMethodRequest;
 
+#include "tokenizer/natives.sp"
 #include "tokenizer/forwards.sp"
 
 public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max) 
@@ -41,9 +36,19 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
     );
 
     // Action tokenizer_OnTokenStorageRequest(const char[] operation, JsonBuilder context)  
-    g_gfTokenFromStorageRequest = CreateGlobalForward(
+    g_gfTokenStorageRequest = CreateGlobalForward(
         "tokenizer_OnTokenStorageRequest", ET_Hook, Param_String, Param_Cell    
     );
+
+    // Action tokenizer_OnTokenMethodRequest(const char[] operation, JsonBuilder context)  
+    g_gfTokenMethodRequest = CreateGlobalForward(
+        "tokenizer_OnTokenMethodRequest", ET_Hook, Param_String, Param_Cell    
+    );
+
+    CreateNative("tokenizer_Token",                     tokenToken);
+    CreateNative("tokenizer_TokenSecurity",             tokenTokenSecurity);
+    CreateNative("tokenizer_TokenStorage",              tokenTokenStorage);
+    CreateNative("tokenizer_TokenMethodGeneration",     tokenMethodGeneration);
 
     RegPluginLibrary("tokenizer");
 
