@@ -21,8 +21,7 @@ GlobalForward g_gfOnTokenRequest;
 GlobalForward g_gfOnTokenResponse;
 
 static const char myself_path[] = "core";
-static const char myself_config[] = 
-        "core.config";
+static const char myself_config[] = "core.config";
 
 #include "tokenizer/natives.sp"
 #include "tokenizer/forwards.sp"
@@ -68,11 +67,11 @@ public void OnMapStart()
         "configs/tokenizer/settings.json";
 
     if(!FileExists(configPath))
-        SetFailState("Whare is my config: %s ?", configPath);
+        SetFailState("Where is my config: %s ?", configPath);
 
     g_jsonConfig = Json.JsonF(configPath, 0);
-    g_jsonConfig.SetString("VERSION_API", TOKENIZER_API_VERSION);
-    g_jsonConfig.SetString("VERSION", TOKENIZER_VERSION);
+    asJSONO(g_jsonConfig).SetString("VERSION_API", TOKENIZER_API_VERSION);
+    asJSONO(g_jsonConfig).SetString("VERSION", TOKENIZER_VERSION);
 
     tokenizer_SendRequest(myself_config, g_jsonConfig);
 }
