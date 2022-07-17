@@ -1,3 +1,16 @@
 {
-    "name": "Tokenizer"
+    "name": "Tokenizer",
+
+    "storage": 
+    {
+        "disk": 
+        {
+            "path": "data/tokenizer"
+        },
+
+        "mysql":
+        {
+            "name": "tokenizer"
+        }
+    }
 }
